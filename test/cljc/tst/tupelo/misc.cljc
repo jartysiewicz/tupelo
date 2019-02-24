@@ -148,26 +148,20 @@
 
          (throws? RuntimeException (misc/shell-cmd "LLLls -ldF *"))))
 
-     (dotest
-       (misc/dots-config! {:dots-per-row 10 :decimation 1})
-       (is= (ts/collapse-whitespace (with-out-str
-                                      (misc/with-dots
-                                        (doseq [x (range 9)]
-                                          (misc/dot)))))
-         (ts/collapse-whitespace
-           "0 .........
-            9 total"))
-
-       (misc/dots-config! {:dots-per-row 10 :decimation 3})
-       (is= (ts/collapse-whitespace (with-out-str
-                                      (misc/with-dots
-                                        (doseq [x (range 99)]
-                                          (misc/dot)))))
-         (ts/collapse-whitespace
-           "  0 ..........
-             30 ..........
-             60 ..........
-             90 ...
-             99 total")))
 
 ))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
