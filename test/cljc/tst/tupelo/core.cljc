@@ -9,6 +9,7 @@
   #?(:clj (:require
             [tupelo.test :as ttst :refer [define-fixture deftest dotest dotest-focus is isnt is= isnt= set= nonblank= testing throws?]]
             [clojure.string :as str]
+            [clojure.test :as tst]
             [tupelo.core :as t :refer [spy spyx spyxx]]
             [tupelo.string :as ts]
             [tupelo.types :as types]
@@ -2622,6 +2623,9 @@
 
 
           ))
+
+(tst/deftest  abc
+  (tst/is (= 4 5)) )
 
 
 
