@@ -11,10 +11,7 @@
     [tupelo.string :as ts]
     [tupelo.test :refer [define-fixture dotest dotest-focus is isnt is= isnt= set= nonblank= testing throws?]]
     )
-  (:import [java.lang Byte Integer])
-  )
-
-#?(:cljs (enable-console-print!))
+  (:import [java.lang Byte Integer]) )
 
 (dotest
   (let [data [1 2 3]]
@@ -127,63 +124,63 @@
                              #?(:cljs cljs.core/UUID)))
     (is= (misc/uuid->sha uuid-val) "03a49d4729c971a0dc8ddf8d8847290416ad58d2")))
 
-#?(:clj
-   (do
-
-     (dotest
-       (let [sqrt-2     1.414213562
-             sqrt-2-rnd (misc/round-pow sqrt-2 -2)
-             error      (- 1.414 sqrt-2-rnd)]
-         (is (<= 0 (Math/abs error) 0.01))
-         (is (rel= sqrt-2-rnd sqrt-2 :tol 0.01)))
-       (let [val     12345
-             val-rnd (misc/round-pow val 2)
-             error   (- val val-rnd)]
-         (is (<= 0 (Math/abs error) 100))
-         (is (rel= val-rnd val :tol 100))
-         (is (rel= val-rnd val :digits 2))
-         (isnt (rel= val-rnd val :digits 4)) ) )
-
-     (dotest
-       (is (#{:windows :linux :mac} (misc/get-os))))
-
-     (dotest
-       (when (= :linux (misc/get-os))
-         (let [result (misc/shell-cmd "ls -ldF *")]
-           (when false ; set true -> debug print
-             (println "(:out result)")
-             (println (:out result)))
-           (is (= 0 (:exit result))))
-         (let [result (misc/shell-cmd "ls /bin/bash")]
-           (is (= 0 (:exit result)))
-           (is (= 1 (count (re-seq #"/bin/bash" (:out result))))))
-         (binding [misc/*os-shell* "/bin/sh"]
-           (let [result (misc/shell-cmd "ls /bin/*sh")]
-             (is (= 0 (:exit result)))
-             (is (< 0 (count (re-seq #"/bin/bash" (:out result)))))))
-
-         (throws? RuntimeException (misc/shell-cmd "LLLls -ldF *"))))
-
-     (dotest
-       (misc/dots-config! {:dots-per-row 10 :decimation 1})
-       (is= (ts/collapse-whitespace (with-out-str
-                                      (misc/with-dots
-                                        (doseq [x (range 9)]
-                                          (misc/dot)))))
-         (ts/collapse-whitespace
-           "0 .........
-            9 total"))
-
-       (misc/dots-config! {:dots-per-row 10 :decimation 3})
-       (is= (ts/collapse-whitespace (with-out-str
-                                      (misc/with-dots
-                                        (doseq [x (range 99)]
-                                          (misc/dot)))))
-         (ts/collapse-whitespace
-           "  0 ..........
-             30 ..........
-             60 ..........
-             90 ...
-             99 total")))
-
-))
+;#?(:clj
+;   (do
+;
+;     (dotest
+;       (let [sqrt-2     1.414213562
+;             sqrt-2-rnd (misc/round-pow sqrt-2 -2)
+;             error      (- 1.414 sqrt-2-rnd)]
+;         (is (<= 0 (Math/abs error) 0.01))
+;         (is (rel= sqrt-2-rnd sqrt-2 :tol 0.01)))
+;       (let [val     12345
+;             val-rnd (misc/round-pow val 2)
+;             error   (- val val-rnd)]
+;         (is (<= 0 (Math/abs error) 100))
+;         (is (rel= val-rnd val :tol 100))
+;         (is (rel= val-rnd val :digits 2))
+;         (isnt (rel= val-rnd val :digits 4)) ) )
+;
+;     (dotest
+;       (is (#{:windows :linux :mac} (misc/get-os))))
+;
+;     (dotest
+;       (when (= :linux (misc/get-os))
+;         (let [result (misc/shell-cmd "ls -ldF *")]
+;           (when false ; set true -> debug print
+;             (println "(:out result)")
+;             (println (:out result)))
+;           (is (= 0 (:exit result))))
+;         (let [result (misc/shell-cmd "ls /bin/bash")]
+;           (is (= 0 (:exit result)))
+;           (is (= 1 (count (re-seq #"/bin/bash" (:out result))))))
+;         (binding [misc/*os-shell* "/bin/sh"]
+;           (let [result (misc/shell-cmd "ls /bin/*sh")]
+;             (is (= 0 (:exit result)))
+;             (is (< 0 (count (re-seq #"/bin/bash" (:out result)))))))
+;
+;         (throws? RuntimeException (misc/shell-cmd "LLLls -ldF *"))))
+;
+;     (dotest
+;       (misc/dots-config! {:dots-per-row 10 :decimation 1})
+;       (is= (ts/collapse-whitespace (with-out-str
+;                                      (misc/with-dots
+;                                        (doseq [x (range 9)]
+;                                          (misc/dot)))))
+;         (ts/collapse-whitespace
+;           "0 .........
+;            9 total"))
+;
+;       (misc/dots-config! {:dots-per-row 10 :decimation 3})
+;       (is= (ts/collapse-whitespace (with-out-str
+;                                      (misc/with-dots
+;                                        (doseq [x (range 99)]
+;                                          (misc/dot)))))
+;         (ts/collapse-whitespace
+;           "  0 ..........
+;             30 ..........
+;             60 ..........
+;             90 ...
+;             99 total")))
+;
+;))
