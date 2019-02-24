@@ -127,10 +127,6 @@
 #?(:clj
    (do
 
-
-     (dotest
-       (is (#{:windows :linux :mac} (misc/get-os))))
-
      (dotest
        (when (= :linux (misc/get-os))
          (let [result (misc/shell-cmd "ls -ldF *")]
