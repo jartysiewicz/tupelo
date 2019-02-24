@@ -7,8 +7,9 @@
 (ns tupelo.test
   "Testing functions."
   (:require
-     [tupelo.core :as t ]
-     [tupelo.string :as tstr]
+    [clojure.test :as cljtst]
+    [tupelo.core :as t]
+    [tupelo.string :as tstr]
   ))
 
 (defn use-fixtures [& args] (apply clojure.test/use-fixtures args))
