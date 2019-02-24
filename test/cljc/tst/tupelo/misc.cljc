@@ -6,22 +6,12 @@
 ;   You must not remove this notice, or any other, from this software.
 (ns tst.tupelo.misc
   (:require
-    [clojure.string :as str]
+    [tupelo.core :as t :refer [spy spyx spyxx it-> rel=]]
     [tupelo.misc :as misc]
-    #?@(:clj [[schema.core :as s]
-              [tupelo.test :refer [define-fixture dotest dotest-focus is isnt is= isnt= set= nonblank= testing throws?]]
-              [tupelo.core :as t :refer [spy spyx spyxx it-> rel=]]
-              [tupelo.string :as ts]
-              ])
-    #?@(:cljs [[schema.core :as s]
-               [tupelo.test-cljs :refer [define-fixture dotest is isnt is= isnt= set= nonblank= testing throws?]]
-               [tupelo.core :as t :refer [spy spyx spyxx] :include-macros true]
-               [tupelo.string :as ts :include-macros true]
-               [goog.crypt :as crypt]
-               [goog.crypt.Sha1]
-               [reagent.format :as rf]
-               ]))
-  #?(:clj (:import [java.lang Byte Integer]))
+    [tupelo.string :as ts]
+    [tupelo.test :refer [define-fixture dotest dotest-focus is isnt is= isnt= set= nonblank= testing throws?]]
+    )
+  (:import [java.lang Byte Integer])
   )
 
 #?(:cljs (enable-console-print!))
