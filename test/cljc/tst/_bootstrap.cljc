@@ -9,11 +9,9 @@
   Clojure version."
   (:require
     [schema.core :as s]
+    [tupelo.core :as t]
     [tupelo.test   :refer [define-fixture dotest is isnt is= isnt= nonblank= testing throws?]]
-    [tupelo.core :as i]
   ))
-
-#?(:cljs (enable-console-print!))
 
 (s/set-fn-validation! true) ; enforce fn schemas
 
@@ -22,6 +20,6 @@
 ; (set! *warn-on-reflection* true)  ; #todo enable?
 
 (dotest
-  (i/print-versions)
+  (t/print-versions)
   ;(spyx (s/fn-validation?))
   )
