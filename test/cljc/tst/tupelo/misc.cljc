@@ -124,29 +124,27 @@
                              #?(:cljs cljs.core/UUID)))
     (is= (misc/uuid->sha uuid-val) "03a49d4729c971a0dc8ddf8d8847290416ad58d2")))
 
-#?(:clj
-   (do
 
-     (dotest
-       (when (= :linux (misc/get-os))
-         (let [result (misc/shell-cmd "ls -ldF *")]
-           (when false ; set true -> debug print
-             (println "(:out result)")
-             (println (:out result)))
-           (is (= 0 (:exit result))))
-         (let [result (misc/shell-cmd "ls /bin/bash")]
-           (is (= 0 (:exit result)))
-           (is (= 1 (count (re-seq #"/bin/bash" (:out result))))))
-         (binding [misc/*os-shell* "/bin/sh"]
-           (let [result (misc/shell-cmd "ls /bin/*sh")]
-             (is (= 0 (:exit result)))
-             (is (< 0 (count (re-seq #"/bin/bash" (:out result)))))))
+(dotest
+  (when (= :linux (misc/get-os))
+    (println "***** found linux ***** ")
+    (let [result (misc/shell-cmd "ls -ldF *")]
+      (when false ; set true -> debug print
+        (println "(:out result)")
+        (println (:out result)))
+      (is= 0 (:exit result)))
+    (let [result (misc/shell-cmd "ls /bin/bash")]
+      (is= 0 (:exit result))
+      (is= 1 (count (re-seq #"/bin/bash" (:out result)))))
+    (binding [misc/*os-shell* "/bin/sh"]
+      (let [result (misc/shell-cmd "ls /bin/*sh")]
+        (is= 0 (:exit result))
+        (is (pos? (count (re-seq #"/bin/bash" (:out result)))))))
 
-         (throws? RuntimeException (misc/shell-cmd "LLLls -ldF *"))))
-
-
-))
-
+    (throws? RuntimeException (misc/shell-cmd "LLLls -ldF *"))
+    (println "***** leaving linux ***** ")
+    )
+  )
 
 
 
