@@ -14,12 +14,7 @@
             [tupelo.string :as ts]
             [tupelo.types :as types]
             ))
-  #?(:cljs (:require
-             [tupelo.test-cljs :refer [define-fixture deftest dotest is isnt is= isnt= set= nonblank= testing throws?]]
-             [clojure.string :as str]
-             [tupelo.core :as t :refer [spy spyx spyxx] :include-macros true]
-             [tupelo.string :as ts :include-macros true]
-             )))
+  )
 
 #?(:cljs (enable-console-print!))
 
